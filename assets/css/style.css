@@ -1,0 +1,87 @@
+
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; 
+}
+
+html {
+    font-size: 62.5%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Glegoo', serif;
+    background-color: #451010;
+    background-image: url("../images/Clot.jpg");
+}
+
+h1 {
+    text-align: center;
+    font-size: 7.3rem;
+    letter-spacing: 1rem;
+    color: #fcfcfc;
+    padding: 1rem 0 4rem 0;
+    text-shadow: 0 .6rem rgba(49,27,27, .5);
+}
+
+h3 {
+    text-align: center;
+    font-size: 3.4rem;
+    color: #fcfcfc;
+}
+
+.lower-half {
+    font-family: "Oxygen"
+}
+.guess-letter {
+    font-size: 18rem;
+    text-align: center;
+    font-weight: 700;
+    color: #aaffaa;
+    transform: translateY(18vh);
+}
+hr {
+    opacity: .3;
+    width: 83%;
+    transform: translate(9%,37vh);
+}
+button {
+    font-size: 2rem;
+    padding: 2rem 3rem;
+    border-radius: 1.5rem;
+    letter-spacing: .3rem;
+    background-color: transparent;
+    color: #aaffaa;
+    border: 1px solid #aaffaa;
+    /*transform: translate(43.2vw,39vh);*/
+}
+button:hover {
+    cursor: pointer;
+    color: #451010;
+    background-color: rgba(170, 255, 170, .7);
+}
+button:active {
+    outline: none;
+     background-color: rgba(170, 255, 170, .4);
+}
+ul {
+    list-style: none;
+    color: #fcfcfc;
+    font-size: 2.3rem;
+    transform: translate(12.5vw,38vh) 
+}
+ul li {
+    display: inline;
+    padding: 0 5rem;
+}
+li:nth-child(-n+2) {
+    opacity: .6;
+} 
+li:nth-child(n+4) {
+    opacity: .6;
+} 
+
