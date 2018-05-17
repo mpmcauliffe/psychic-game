@@ -23,13 +23,13 @@ let score, fail, left, tries, choice, hidden;
         -called from init() */
 let mainController = () => {
     
-    window.addEventListener(`keypress`, (event) => {
+    window.addEventListener(`keyup`, (event) => {
 
         // 1) extract input and make it usable
         let x = event.which || event.key,
             press = String.fromCharCode(x);
             choice = press.toLocaleLowerCase();
-        console.log(choice);
+        console.log(`choice ${choice}`);
         // 2) letter varification
         let isLetter = false; 
         for(let i = 0; i < letters.length; i++) {
@@ -40,6 +40,7 @@ let mainController = () => {
         if(!isLetter) {
             stat.textContent = `please enter a letter`;
             stat.style.animation = `4s fadeout 2s forwards`;
+            choice = ""
             mainController();
         } else {
 
@@ -48,11 +49,11 @@ let mainController = () => {
             if(choice === hidden) {
                 stat.textContent = `You guessed it!`;
                 stat.style.animation = `4s fadeout 2s forwards`;
-
+                console.log(`win`);
                 score++;
                 left = 10;
                 tries = 0;
-
+                choice = ""
                 setTimeout(() => {
                     updateDOM();
                     retrieveRandomLetter();
@@ -62,10 +63,11 @@ let mainController = () => {
             } else {
                 stat.textContent = `You guessed wrong. Try again`;
                 stat.style.animation = `4s fadeout 2s forwards`;
-
+                console.log(`miss`);
                 left--;
                 tries++;
-
+                choice = ""
+                console.log(`${left}  ${tries}`);
                 setTimeout(() => {
                     updateDOM();
                     mainController();
@@ -75,11 +77,12 @@ let mainController = () => {
             if(left < 1) {
                 stat.textContent = `I was thinking of the letter ${hidden}. I'm thinking of another letter now.`;
                 stat.style.animation = `6s fadeout 2s forwards`;
-
+                console.log(`lose`);
                 fail++;
                 left = 10;
                 tries = 0;
-
+                choice = ""
+                console.log(`${fail}  ${left}  ${tries}`);
                 setTimeout(() => {
                     updateDOM();
                     retrieveRandomLetter();
@@ -126,7 +129,7 @@ const init = () => {
     fail = 0,
     left = 10,
     tries = 0,
-    choice = "",
+    choice = "";
 
     retrieveRandomLetter();
     updateDOM();
