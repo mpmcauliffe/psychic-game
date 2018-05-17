@@ -33,18 +33,17 @@ h3 {
     font-size: 3.4rem;
     color: #fcfcfc;
 }
-.starter-cover {
-    font-family: 'Glegoo', serif;
-    background-color: rgba(10,10,10, .98);
-    background-size: cover;
-    height: 150vh;
-    position: relative;
-    transform: translateY(-70vh);
-    color: #fcfcfc;
-    padding-top: 8rem;
+
+h6 {
+    font-family: "Oxygen";
+    color: #aaffaa;
+    font-size: 1.6rem;
+    letter-spacing: .2rem;
+    text-align: center;
+    transform: translateY(10vh);
 }
 .lower-half {
-    font-family: "Oxygen"
+    font-family: "Oxygen";
 }
 .guess-letter {
     font-size: 18rem;
@@ -99,3 +98,14 @@ li:nth-child(n+4) {
         opacity: 0; 
     }
 }
+
+/* .starter-cover {
+    font-family: 'Glegoo', serif;
+    background-color: rgba(10,10,10, .98);
+    background-size: cover;
+    height: 150vh;
+    position: relative;
+    transform: translateY(-70vh);
+    color: #fcfcfc;
+    padding-top: 8rem;
+} */
