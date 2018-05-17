@@ -21,63 +21,95 @@ let score, fail, left, tries, choice, hidden;
         -compares the input to the hidden varible 
         -updates DOM 
         -called from init() */
-let mainController = () => {
+//let mainController = () => {
     
-    window.addEventListener(`keyup`, (event) => {
+    document.addEventListener(`keyup`, (event) => {
         choice = "";
         // 1) extract input and make it usable
         let x = event.which || event.key,
             press = String.fromCharCode(x);
             choice = press.toLocaleLowerCase();
-        console.log(`choice ${choice}`);
-        // 2) letter varification
-        let isLetter = false; 
-        for(let i = 0; i < letters.length; i++) {
-            if(choice === letters[i]){
-                isLetter = true;
-            }
-        }
-        if(!isLetter) {
-            stat.textContent = `please enter a letter`;
-            stat.style.animation = `4s fadeout 2s forwards`;
-            choice = ""
-            updateDOM(0)
-        } else {
+        console.log(choice);
 
-            inputGuess.textContent = choice;
-
-            if(choice === hidden) {
-                stat.textContent = `You guessed it!`;
-                stat.style.animation = `4s fadeout 2s forwards`;
-                score++;
-                left = 10;
-                tries = 0;
-               
-                updateDOM(1);
-                              
-            } else {
-                stat.textContent = `You guessed wrong. Try again`;
-                stat.style.animation = `4s fadeout 2s forwards`;
-                
-                left--;
-                tries++;
-                choice = ""
-
-                updateDOM(0);
-            }
-            if(left < 1) {
-                stat.textContent = `I was thinking of the letter ${hidden}. I'm thinking of another letter now.`;
-                stat.style.animation = `6s fadeout 2s forwards`;
-                
-                fail++;
-                left = 10;
-                tries = 0;
-               
-                updateDOM(1);
-            } 
-        }
+        checkChar(choice);
     });
-}  
+//}  
+/* INTERNAL
+        takes String choice 
+        compares it to String hidden and executes the necessary action
+        called from checkChar() */
+const innerLogic = (choice) => {
+    inputGuess.textContent = choice;
+
+    if (choice === hidden) {
+        stat.textContent = `You guessed it!`;
+        stat.style.animation = `4s fadeout 2s forwards`;
+        score++;
+        left = 10;
+        tries = 0;
+
+        updateDOM(1);
+
+    } else {
+        stat.textContent = `You guessed wrong. Try again`;
+        stat.style.animation = `4s fadeout 2s forwards`;
+
+        left--;
+        tries++;
+        choice = ""
+
+        updateDOM(0);
+    }
+    if (left < 1) {
+        stat.textContent = `I was thinking of the letter ${hidden}. I'm thinking of another letter now.`;
+        stat.style.animation = `6s fadeout 2s forwards`;
+
+        fail++;
+        left = 10;
+        tries = 0;
+
+        updateDOM(1);
+    }
+}
+/* INTERNAL
+        takes String argument choice
+        runs choice through loop to check if it's a leter
+        isLetter the function moves on to call innerLogic(choice)
+        !isLetter the function produces a warning output and and calls updateDOM(0)  
+        called within the EVENTLISTENER */
+const checkChar = (choice) => {
+    let isLetter = false;
+    for (let i = 0; i < letters.length; i++) {
+        if (choice === letters[i]) {
+            isLetter = true;
+        }
+    }
+    if (!isLetter) {
+        stat.textContent = `please enter a letter`;
+        stat.style.animation = `4s fadeout 2s forwards`;
+        choice = ""
+        updateDOM(0)
+    } else {
+        innerLogic(choice);
+    }
+}
+
+/* INTERNAL 
+        DOM updates in one place
+        called from checkChar(), innerLogic() and init()*/
+const updateDOM = (code) => {
+    setTimeout(() => {
+        if (code === 1) {
+            retrieveRandomLetter();
+        }
+        wins.innerHTML = `wins: ${score}`;
+        losses.innerHTML = `losses: ${fail}`;
+        remaining.innerHTML = `remaining: ${left}`;
+        taken.innerHTML = `tries: ${tries}`;
+        inputGuess.innerHTML = "_";
+        //mainController();
+    }, 2000);
+}
 
 /* INTERNAL
         using random number this grabs letter from letter[] and updates the value
@@ -88,30 +120,12 @@ const retrieveRandomLetter = () => {
         hidden = letters[randomNum];
 }
 
-/* INTERNAL 
-        DOM updates in one place
-        called within the event of mainController() and init()*/
-const updateDOM = (code) => {
-    setTimeout(() => {
-        if(code === 1){
-            retrieveRandomLetter();
-        }
-        wins.innerHTML = `wins: ${score}`;
-        losses.innerHTML = `losses: ${fail}`;
-        remaining.innerHTML = `remaining: ${left}`;
-        taken.innerHTML = `tries: ${tries}`;
-        inputGuess.innerHTML = "_";
-        mainController();
-    }, 3000);
-}
-
 
 /* EVENTLISTENER:
         resets game by calling the init() */
 document.getElementById(`reset`).addEventListener(`click`, () => {
     init();
 })
-
 
 /* USER TRIGGER & INTERNAL 
         this function resets the board to its initial state
@@ -122,10 +136,11 @@ const init = () => {
     left = 10,
     tries = 0,
     choice = "";
+    hiddent = "";
 
     retrieveRandomLetter();
     updateDOM();
-    mainController();
+    //mainController();
 }
 init();
 
