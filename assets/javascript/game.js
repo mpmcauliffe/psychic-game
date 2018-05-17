@@ -117,7 +117,8 @@ const updateDOM = (code) => {
         called from event in mainController() and init() */
 const retrieveRandomLetter = () => {
     let randomNum = Math.floor(Math.random() * 26),
-        hidden = letters[randomNum];
+        x = letters[randomNum];
+        return x;
 }
 
 
@@ -135,10 +136,10 @@ const init = () => {
     fail = 0,
     left = 10,
     tries = 0,
-    choice = "";
-    hiddent = "";
+    choice = "",
+    hidden = retrieveRandomLetter();
 
-    retrieveRandomLetter();
+    
     updateDOM();
     //mainController();
 }
