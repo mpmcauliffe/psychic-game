@@ -24,7 +24,7 @@ let score, fail, left, tries, choice, hidden;
 let mainController = () => {
     
     window.addEventListener(`keyup`, (event) => {
-
+        choice = "";
         // 1) extract input and make it usable
         let x = event.which || event.key,
             press = String.fromCharCode(x);
@@ -41,7 +41,7 @@ let mainController = () => {
             stat.textContent = `please enter a letter`;
             stat.style.animation = `4s fadeout 2s forwards`;
             choice = ""
-            mainController();
+            updateDOM(0)
         } else {
 
             inputGuess.textContent = choice;
@@ -49,45 +49,31 @@ let mainController = () => {
             if(choice === hidden) {
                 stat.textContent = `You guessed it!`;
                 stat.style.animation = `4s fadeout 2s forwards`;
-                console.log(`win`);
                 score++;
                 left = 10;
                 tries = 0;
-                choice = ""
-                setTimeout(() => {
-                    updateDOM();
-                    retrieveRandomLetter();
-                    mainController();
-                }, 3000);
+               
+                updateDOM(1);
                               
             } else {
                 stat.textContent = `You guessed wrong. Try again`;
                 stat.style.animation = `4s fadeout 2s forwards`;
-                console.log(`miss`);
+                
                 left--;
                 tries++;
                 choice = ""
-                console.log(`${left}  ${tries}`);
-                setTimeout(() => {
-                    updateDOM();
-                    mainController();
-                }, 3000);
 
+                updateDOM(0);
             }
             if(left < 1) {
                 stat.textContent = `I was thinking of the letter ${hidden}. I'm thinking of another letter now.`;
                 stat.style.animation = `6s fadeout 2s forwards`;
-                console.log(`lose`);
+                
                 fail++;
                 left = 10;
                 tries = 0;
-                choice = ""
-                console.log(`${fail}  ${left}  ${tries}`);
-                setTimeout(() => {
-                    updateDOM();
-                    retrieveRandomLetter();
-                    mainController();
-                }, 3000);
+               
+                updateDOM(1);
             } 
         }
     });
@@ -105,12 +91,18 @@ const retrieveRandomLetter = () => {
 /* INTERNAL 
         DOM updates in one place
         called within the event of mainController() and init()*/
-const updateDOM = () => {
-    wins.innerHTML = `wins: ${score}`;
-    losses.innerHTML = `losses: ${fail}`;
-    remaining.innerHTML = `remaining: ${left}`;
-    taken.innerHTML = `tries: ${tries}`;
-    inputGuess.innerHTML = "_";
+const updateDOM = (code) => {
+    setTimeout(() => {
+        if(code === 1){
+            retrieveRandomLetter();
+        }
+        wins.innerHTML = `wins: ${score}`;
+        losses.innerHTML = `losses: ${fail}`;
+        remaining.innerHTML = `remaining: ${left}`;
+        taken.innerHTML = `tries: ${tries}`;
+        inputGuess.innerHTML = "_";
+        mainController();
+    }, 3000);
 }
 
 
