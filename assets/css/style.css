@@ -33,7 +33,16 @@ h3 {
     font-size: 3.4rem;
     color: #fcfcfc;
 }
-
+.starter-cover {
+    font-family: 'Glegoo', serif;
+    background-color: rgba(10,10,10, .98);
+    background-size: cover;
+    height: 150vh;
+    position: relative;
+    transform: translateY(-70vh);
+    color: #fcfcfc;
+    padding-top: 8rem;
+}
 .lower-half {
     font-family: "Oxygen"
 }
@@ -42,12 +51,12 @@ h3 {
     text-align: center;
     font-weight: 700;
     color: #aaffaa;
-    transform: translateY(18vh);
+    transform: translateY(10vh);
 }
 hr {
     opacity: .3;
     width: 83%;
-    transform: translate(9%,37vh);
+    transform: translate(9%,25vh);
 }
 button {
     font-size: 2rem;
@@ -72,7 +81,7 @@ ul {
     list-style: none;
     color: #fcfcfc;
     font-size: 2.3rem;
-    transform: translate(12.5vw,38vh) 
+    transform: translate(10.2vw,30vh) 
 }
 ul li {
     display: inline;
@@ -85,3 +94,8 @@ li:nth-child(n+4) {
     opacity: .6;
 } 
 
+@keyframes fadeout {
+    100% {
+        opacity: 0; 
+    }
+}
