@@ -20,20 +20,18 @@ let score, fail, left, tries, choice, hidden;
         -varifies the input
         -compares the input to the hidden varible 
         -updates DOM 
-        -called from init() */
-//let mainController = () => {
-    
-    document.addEventListener(`keyup`, (event) => {
-        choice = "";
-        // 1) extract input and make it usable
-        let x = event.which || event.key,
-            press = String.fromCharCode(x);
-            choice = press.toLocaleLowerCase();
-        console.log(choice);
+        -called from init() */    
+document.addEventListener(`keyup`, (event) => {
 
-        checkChar(choice);
-    });
-//}  
+    // 1) extract input and make it usable
+    let x = event.which || event.key,
+        press = String.fromCharCode(x);
+        choice = press.toLocaleLowerCase();
+    //console.log(choice);
+
+    checkChar(choice);
+});
+  
 /* INTERNAL
         takes String choice 
         compares it to String hidden and executes the necessary action
@@ -42,8 +40,8 @@ const innerLogic = (choice) => {
     inputGuess.textContent = choice;
 
     if (choice === hidden) {
+        stat.classList.remove(`log`)
         stat.textContent = `You guessed it!`;
-        stat.style.animation = `4s fadeout 2s forwards`;
         score++;
         left = 10;
         tries = 0;
@@ -51,8 +49,9 @@ const innerLogic = (choice) => {
         updateDOM(1);
 
     } else {
+        stat.classList.remove(`log`)
         stat.textContent = `You guessed wrong. Try again`;
-        stat.style.animation = `4s fadeout 2s forwards`;
+        
 
         left--;
         tries++;
@@ -61,8 +60,9 @@ const innerLogic = (choice) => {
         updateDOM(0);
     }
     if (left < 1) {
+        stat.classList.remove(`log`)
         stat.textContent = `I was thinking of the letter ${hidden}. I'm thinking of another letter now.`;
-        stat.style.animation = `6s fadeout 2s forwards`;
+        
 
         fail++;
         left = 10;
@@ -85,9 +85,8 @@ const checkChar = (choice) => {
         }
     }
     if (!isLetter) {
+        stat.classList.remove(`log`)
         stat.textContent = `please enter a letter`;
-        stat.style.animation = `4s fadeout 2s forwards`;
-        choice = ""
         updateDOM(0)
     } else {
         innerLogic(choice);
@@ -98,15 +97,17 @@ const checkChar = (choice) => {
         DOM updates in one place
         called from checkChar(), innerLogic() and init()*/
 const updateDOM = (code) => {
+    //inputGuess.style.animation = `2s fadeout 2s forwards`;
     setTimeout(() => {
         if (code === 1) {
-            retrieveRandomLetter();
+            hidden = retrieveRandomLetter();
         }
         wins.innerHTML = `wins: ${score}`;
         losses.innerHTML = `losses: ${fail}`;
         remaining.innerHTML = `remaining: ${left}`;
         taken.innerHTML = `tries: ${tries}`;
         inputGuess.innerHTML = "_";
+        stat.classList.add(`log`);
         //mainController();
     }, 2000);
 }

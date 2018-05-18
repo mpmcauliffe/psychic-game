@@ -40,7 +40,11 @@ h6 {
     font-size: 1.6rem;
     letter-spacing: .2rem;
     text-align: center;
-    transform: translateY(10vh);
+    transform: translateY(30vh);
+}
+.log{
+    display: none;
+   
 }
 .lower-half {
     font-family: "Oxygen";
@@ -50,12 +54,12 @@ h6 {
     text-align: center;
     font-weight: 700;
     color: #aaffaa;
-    transform: translateY(10vh);
+    transform: translateY(20vh);
 }
 hr {
     opacity: .3;
     width: 83%;
-    transform: translate(9%,25vh);
+    transform: translate(9%,35vh);
 }
 button {
     font-size: 2rem;
@@ -76,15 +80,26 @@ button:active {
     outline: none;
      background-color: rgba(170, 255, 170, .4);
 }
+.list-container {
+    width: 100vw;
+    font-size: 2.3rem;
+    transform: translateY(39vh);
+    display: flex;
+    position: absolute; 
+    justify-content: center;
+    align-content: space-between;
+}
 ul {
     list-style: none;
     color: #fcfcfc;
-    font-size: 2.3rem;
-    transform: translate(10.2vw,30vh) 
 }
 ul li {
     display: inline;
     padding: 0 5rem;
+    align-content: center;
+    flex-shrink: 130;
+    flex-basis: 18rem;
+    
 }
 li:nth-child(-n+2) {
     opacity: .6;
@@ -94,9 +109,26 @@ li:nth-child(n+4) {
 } 
 
 @keyframes fadeout {
-    100% {
-        opacity: 0; 
+    
+    20% {
+        opacity: .4;
     }
+    40% {
+        opacity: .8;
+    }
+    60% {
+        opacity: 1;
+    }
+    80% {
+        opacity: .8;
+    }
+    
+    100% {
+        opacity: .01; 
+    }
+}
+.in-out{
+    animation: 4s fadeout forwards;
 }
 
 /* .starter-cover {
