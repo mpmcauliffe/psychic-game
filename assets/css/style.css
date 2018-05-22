@@ -40,7 +40,7 @@ h6 {
     font-size: 1.6rem;
     letter-spacing: .2rem;
     text-align: center;
-    transform: translateY(30vh);
+    transform: translateY(20vh);
 }
 .log{
     display: none;
@@ -50,16 +50,16 @@ h6 {
     font-family: "Oxygen";
 }
 .guess-letter {
-    font-size: 18rem;
+    font-size: 15rem;
     text-align: center;
     font-weight: 700;
     color: #aaffaa;
-    transform: translateY(20vh);
+    transform: translateY(15vh);
 }
 hr {
     opacity: .3;
     width: 83%;
-    transform: translate(9%,35vh);
+    transform: translate(9%,27vh);
 }
 button {
     font-size: 2rem;
@@ -83,7 +83,7 @@ button:active {
 .list-container {
     width: 100vw;
     font-size: 2.3rem;
-    transform: translateY(39vh);
+    transform: translateY(33vh);
     display: flex;
     position: absolute; 
     justify-content: center;
